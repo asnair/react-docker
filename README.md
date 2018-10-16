@@ -1,3 +1,24 @@
+# 499 Doc
+
+```sh
+git init
+git remote add origin https://github.com/asnair/react-docker
+git pull origin master
+git add .
+git commit -m "Commit message"
+git push origin master
+```
+We use material-ui with react, which exists within a docker container. Every new instance of the Web app spins up a container using hot-reloading.
+
+
+
+
+
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
