@@ -14,6 +14,35 @@ To run node inside docker, just ```./run.sh``` and the app will be available on 
 
 To stop the server, you can run ```docker container list``` then use the *CONTAINER ID* in the command ```docker stop ID``` . The command ```docker image list``` should contain 2 images, 1 being the app and the other being the node backend.
 
+For the basic React app, npm, Node, and Docker are required, which can be installed using:
+```sh
+sudo apt-get install curl
+curl -sL https://deb.nodesource.com/setup_10.x | sudo bash -
+sudo apt-get install npm
+sudo apt-get install nodejs
+```
+
+To install docker (run the first half to remove old docker installations)
+```sh
+sudo apt-get remove docker docker-engine
+sudo apt-get update
+```
+Install Docker:
+```sh
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+sudo apt-get update
+sudo apt-get install docker-ce
+```
+
 Next this can be run using Docker Compose, which allows for container management. The following script should be added to package.js in the project so these commands can be run easier:
 
 ```
