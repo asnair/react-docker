@@ -61,7 +61,7 @@ To stop: ```npm run docker-stop-and-clear```
 
 Every next run will clear previous and build/run again automagically.
 
-
+Don't forget to run build.sh on new installs.
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
