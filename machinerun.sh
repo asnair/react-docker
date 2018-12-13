@@ -1,0 +1,1 @@
+docker run -it --mount type=bind,source=${PWD},destination=/usr/src/app --mount type=bind,source=${PWD}/node_modules,destination=/usr/src/app/node_modules,readonly -p 3000:3000 -e CHOKIDAR_USEPOLLING=true --rm app

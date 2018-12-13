@@ -38,34 +38,39 @@ sudo apt-get install \
         ca-certificates \
             curl \
                 software-properties-common
-                curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-                sudo add-apt-repository \
-                   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-                      $(lsb_release -cs) \
-                         stable"
-                         sudo apt-get update
-                         sudo apt-get install docker-ce
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    sudo add-apt-repository \
+        "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+            $(lsb_release -cs) \
+                stable"
+sudo apt-get update
+sudo apt-get install docker-ce
+```
+Next this can be run using Docker Compose, which allows for container management. The following script should be added to package.js in the project so these commands can be run easier:
+
+```
+"scripts": {    
+
+"docker-build-and-run": "docker build -t image-dev-local . && docker run -p 3000:3000 --name container-dev-local image-dev-local", "docker-stop-and-clear": "(docker stop container-dev-local || true) && (docker rm container-dev-local || true)", "docker-run": "npm run docker-stop-and-clear && npm run docker-build-and-run"}
                          ```
 
-                         Next this can be run using Docker Compose, which allows for container management. The following script should be added to package.js in the project so these commands can be run easier:
+To start: ```npm run docker-run```
 
-                         ```
-                         "scripts": {    
+To stop: ```npm run docker-stop-and-clear```
 
-                             "docker-build-and-run": "docker build -t image-dev-local . && docker run -p 3000:3000 --name container-dev-local image-dev-local",
-                             "docker-stop-and-clear": "(docker stop container-dev-local || true) && (docker rm container-dev-local || true)",
-                             "docker-run": "npm run docker-stop-and-clear && npm run docker-build-and-run"
+Every next run will clear previous and build/run again automagically.
 
-                         }
-                         ```
+Don't forget to run build.sh on new installs.
 
-                         To start: ```npm run docker-run```
+To get hot-reloading working, trying to use docker-machine, which creates a VM using virtualbox to automatically manage docker container instances.
+Install docker-machine using the following:
+```sh
+base=https://github.com/docker/machine/releases/download/v0.16.0 &&
+  curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine &&
+    sudo install /tmp/docker-machine /usr/local/bin/docker-machine
 
-                         To stop: ```npm run docker-stop-and-clear```
+```
 
-                         Every next run will clear previous and build/run again automagically.
+You can then use machinerun.sh to try and run it. The current issue is that when volumes are mounted to build the app, they only mount to the host machine and not the VM.
 
-                         Don't forget to run build.sh on new installs.
-
-
-                         This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
