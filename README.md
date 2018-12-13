@@ -52,7 +52,7 @@ Next this can be run using Docker Compose, which allows for container management
 "scripts": {    
 
 "docker-build-and-run": "docker build -t image-dev-local . && docker run -p 3000:3000 --name container-dev-local image-dev-local", "docker-stop-and-clear": "(docker stop container-dev-local || true) && (docker rm container-dev-local || true)", "docker-run": "npm run docker-stop-and-clear && npm run docker-build-and-run"}
-                         ```
+```
 
 To start: ```npm run docker-run```
 
@@ -64,7 +64,8 @@ Don't forget to run build.sh on new installs.
 
 To get hot-reloading working, trying to use docker-machine, which creates a VM using virtualbox to automatically manage docker container instances.
 Install docker-machine using the following:
-```sh
+
+```
 base=https://github.com/docker/machine/releases/download/v0.16.0 &&
   curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine &&
     sudo install /tmp/docker-machine /usr/local/bin/docker-machine
